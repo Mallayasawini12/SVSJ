@@ -68,10 +68,10 @@ export default function AIChatbot() {
         'rate', 'price', 'cost', 'today', 'gram', 'weight', 'sovereign', 'tola', '22k', '24k', '92.5', 'silver', 'gold', 'diamond',
         'locket', 'pendant', 'necklace', 'haram', 'choker', 'bangle', 'kada', 'earring', 'jhumka', 'ring', 'chain', 'bracelet',
         'pooja', 'puja', 'diya', 'deepam', 'kalash', 'kundi', 'plate', 'idol', 'statue', 'ornament', 'item', 'product', 'design', 'collection', 'bridal', 'wedding', 'trousseau',
-        'bis', 'hallmark', '916', 'karat', 'carat', 'svsj', 'sapathigiri', 'venkata', 'store', 'showroom', 'location', 'address',
+        'bis', 'hallmark', '916', 'karat', 'carat', 'svsj', 'sapathigiri', 'sapthagiri', 'venkata', 'store', 'showroom', 'location', 'address',
         'where', 'timing', 'hours', 'contact', 'phone', 'call', 'whatsapp', 'instagram', 'scheme', 'saving', 'offer', 'discount',
         'making charge', 'shravana', 'hi', 'hello', 'namaste', 'hey', 'help', 'info', 'details', 'who are you', 'what can you do',
-        'options', 'buy', 'order', 'custom', 'karigar', 'artisan', 'kids', 'men', 'women'
+        'options', 'buy', 'order', 'custom', 'karigar', 'artisan', 'kids', 'men', 'women', 'anakapalle', 'pappula', 'veedhi', 'pincode', 'map', 'landmark'
       ];
       return keywords.some(k => text.includes(k));
     };
@@ -196,15 +196,18 @@ export default function AIChatbot() {
     }
 
     // 7. LOCATION, TIMINGS & CONTACT INTENT
-    if (q.includes('location') || q.includes('address') || q.includes('where') || q.includes('timing') || q.includes('hours') || q.includes('contact') || q.includes('phone') || q.includes('whatsapp') || q.includes('instagram')) {
+    if (q.includes('location') || q.includes('address') || q.includes('where') || q.includes('timing') || q.includes('hours') || q.includes('contact') || q.includes('phone') || q.includes('whatsapp') || q.includes('instagram') || q.includes('map') || q.includes('landmark') || q.includes('anakapalle') || q.includes('pappula') || q.includes('pincode')) {
       return {
-        text: `📍 **Sri Venkata Sapathigiri Jewellers Store Details**:\n\n` +
-              `• **Flagship Showroom**: South India Heritage Center\n` +
-              `• **Store Timings**: 10:00 AM – 9:00 PM (Open All 7 Days)\n` +
-              `• **WhatsApp & Direct Call**: +91 92466 68319\n` +
-              `• **Instagram**: @newsrivenkata\n` +
-              `• **Purity Certification**: 100% BIS 916 Hallmarked Gold & 92.5 Sterling Silver\n` +
-              `• **Established**: 2013 (Purity & Trust Since 2013)`,
+        text: `📍 **Sri Venkata Sapthagiri Jewellers Store Location & Address**:\n\n` +
+              `• **Showroom Address**: Opposite Fish Market, Pappula Veedhi, Anakapalle, Andhra Pradesh - 531001\n` +
+              `• **Landmark**: Opposite Fish Market, Pappula Veedhi\n` +
+              `• **Pincode**: 531001\n` +
+              `• **Customer Helpline / WhatsApp**: **+91 92466 68319**\n` +
+              `• **Email**: mallayasaswini7@gmail.com\n\n` +
+              `⏰ **Business Hours**:\n` +
+              `• **Monday – Saturday**: 09:00 AM – 09:00 PM\n` +
+              `• **Sunday**: 09:00 AM – 01:00 PM (Open All 7 Days)\n\n` +
+              `✨ *Established 2013 • 100% BIS 916 Hallmarked Gold & 92.5 Sterling Silver Ornaments.*`,
         suggestions: ["💬 Open WhatsApp Chat", "📅 Book Store Appointment", "🪙 Check Live Gold Rate"]
       };
     }
