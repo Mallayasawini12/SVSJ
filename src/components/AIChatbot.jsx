@@ -56,10 +56,38 @@ export default function AIChatbot() {
   };
 
   // =========================================================
-  // RAG KNOWLEDGE RETRIEVAL & ANSWER GENERATION ENGINE
+  // RAG KNOWLEDGE RETRIEVAL & GROUNDING ENGINE
+  // (Strict adherence to "The Chatbot Rule" — never invent data)
   // =========================================================
   const generateRAGResponse = (userQuery) => {
     const q = userQuery.toLowerCase().trim();
+
+    // Domain Relevance Check (In-domain store topics)
+    const isDomainQuery = (text) => {
+      const keywords = [
+        'rate', 'price', 'cost', 'today', 'gram', 'weight', 'sovereign', 'tola', '22k', '24k', '92.5', 'silver', 'gold', 'diamond',
+        'locket', 'pendant', 'necklace', 'haram', 'choker', 'bangle', 'kada', 'earring', 'jhumka', 'ring', 'chain', 'bracelet',
+        'pooja', 'puja', 'diya', 'deepam', 'kalash', 'kundi', 'plate', 'idol', 'statue', 'ornament', 'item', 'product', 'design', 'collection', 'bridal', 'wedding', 'trousseau',
+        'bis', 'hallmark', '916', 'karat', 'carat', 'svsj', 'sapathigiri', 'venkata', 'store', 'showroom', 'location', 'address',
+        'where', 'timing', 'hours', 'contact', 'phone', 'call', 'whatsapp', 'instagram', 'scheme', 'saving', 'offer', 'discount',
+        'making charge', 'shravana', 'hi', 'hello', 'namaste', 'hey', 'help', 'info', 'details', 'who are you', 'what can you do',
+        'options', 'buy', 'order', 'custom', 'karigar', 'artisan', 'kids', 'men', 'women'
+      ];
+      return keywords.some(k => text.includes(k));
+    };
+
+    // STRICT CHATBOT RULE: If query is out-of-domain or asks for non-store data, MUST say "I don't know"
+    if (!isDomainQuery(q)) {
+      return {
+        text: `**I don't know.**\n\nI don't know based on our verified store data. As the AI Assistant for **Sri Venkata Sapathigiri Jewellers**, I only answer using real data from our business — I never guess or invent an answer.\n\nI can assist you with:\n• Live 22K/24K Gold & 92.5 Silver rates\n• Jewelry Catalog (Necklaces, Bangles, Rings, Lockets)\n• Sacred Silver Pooja Items & Deity Lockets\n• Bridal Collections & Special Offers\n• Store Location & WhatsApp Assistance`,
+        suggestions: [
+          "🪙 Today's Gold & Silver Rates",
+          "📿 Deity Lockets (Gold/Silver)",
+          "👑 Bridal Jewelry Collection",
+          "📍 Store Location & Timings"
+        ]
+      };
+    }
 
     // 1. LIVE GOLD & SILVER RATES INTENT
     if (q.includes('rate') || q.includes('price per gram') || q.includes('today') || q.includes('cost') || q.includes('22k') || q.includes('24k') || q.includes('silver rate')) {
@@ -181,7 +209,7 @@ export default function AIChatbot() {
       };
     }
 
-    // 8. GENERAL / KEYWORD MATCH FALLBACK
+    // 8. GENERAL / KEYWORD MATCH FALLBACK ON CATALOG PRODUCTS
     const generalMatches = products.filter(p => 
       p.title.toLowerCase().includes(q) || 
       (p.description && p.description.toLowerCase().includes(q)) ||
@@ -196,16 +224,14 @@ export default function AIChatbot() {
       };
     }
 
-    // DEFAULT UNMATCHED FALLBACK
+    // STRICT CHATBOT RULE FOR UNFOUND DATA: Must say "I don't know"
     return {
-      text: `Thank you for asking! At **Sri Venkata Sapathigiri Jewellers**, we craft 100% BIS 916 Hallmarked Gold jewelry, 92.5 Sterling Silver ornaments, Deity Lockets, Kasu Malas, and Sacred Pooja items.\n\n` +
-            `Would you like me to show you our catalog items, live metal rates, or connect you directly with a designer on WhatsApp?`,
+      text: `**I don't know.**\n\nI don't know based on our store data. As the AI Assistant for **Sri Venkata Sapathigiri Jewellers**, I only answer using real data from our business — never inventing an answer.\n\nI can assist you with:\n• Live 22K/24K Gold & 92.5 Silver rates\n• SVSJ Jewelry Catalog (Necklaces, Bangles, Rings, Lockets)\n• Sacred Silver Pooja Items & Deity Lockets\n• Bridal Collections & Special Offers\n• Store Location & WhatsApp Assistance`,
       suggestions: [
         "🪙 Today's Gold & Silver Rates",
         "📿 Deity Lockets (Gold/Silver)",
         "👑 Bridal Jewelry Collection",
-        "🪔 Sacred Silver Pooja Items",
-        "📍 Showroom Location & WhatsApp"
+        "📍 Store Location & WhatsApp"
       ]
     };
   };
