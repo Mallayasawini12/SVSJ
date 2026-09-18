@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import QuickViewModal from './components/QuickViewModal';
 import WhatsAppButton from './components/WhatsAppButton';
 import AdminPanel from './components/AdminPanel';
+import AIChatbot from './components/AIChatbot';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Page pre-loading spinner component
@@ -94,6 +95,7 @@ function MainLayout() {
           <QuickViewModal />
           <WhatsAppButton />
           <AdminPanel />
+          <AIChatbot />
         </motion.div>
       )}
     </>
